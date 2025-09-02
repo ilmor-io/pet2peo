@@ -1,5 +1,8 @@
 class Web {
     constructor() {
+        //флаг страницы
+        this.savedPage = localStorage.getItem('activePage');
+
         this.header();
         //this.registration();
         this.homePage();
@@ -9,10 +12,10 @@ class Web {
         this.menuBtn = document.getElementById('menu');
         this.myDropdown = document.getElementById('myDropdown');
 
-        this.menuBtn.addEventListener('click', () => {
+        //функция меню
+        const hideMenu = () => {
+            //скрытие меню
             if (this.myDropdown.classList.contains('show')) {
-
-                // Прячем меню
                 this.myDropdown.classList.remove('visible');
                 if (this.containerReg) {
                     this.containerReg.classList.remove('containerRegOpenMenu');
@@ -25,36 +28,62 @@ class Web {
                     this.myDropdown.removeEventListener('transitionend', handleTransitionEnd);
                 };
                 this.myDropdown.addEventListener('transitionend', handleTransitionEnd);
+            }
+        };
+        const showMenu = () => {
+            // Показываем меню
+            this.myDropdown.classList.add('show');
+            if (this.containerReg) {
+                this.containerReg.classList.add('containerRegOpenMenu');
+            }
+            if (this.upHome) {
+                this.upHome.classList.add('upHomeMenuOpen');
+            }
+            requestAnimationFrame(() => {
+              this.myDropdown.classList.add('visible');
+            });
+        }
+
+        //обработчик нажатия на кнопку меню
+        this.menuBtn.addEventListener('click', (e) => {
+            if (this.myDropdown.classList.contains('show')) {
+                hideMenu();
             } else {
-                // Показываем меню
-                this.myDropdown.classList.add('show');
-                if (this.containerReg) {
-                    this.containerReg.classList.add('containerRegOpenMenu');
-                }
-                if (this.upHome) {
-                    this.upHome.classList.add('upHomeMenuOpen');
-                }
-                requestAnimationFrame(() => {
-                  this.myDropdown.classList.add('visible');
-                });
+                showMenu();
+            }
+        })
+            
+        //обработчик клика вне меню
+        document.addEventListener('click', (e) => {
+            if (this.myDropdown.classList.contains('show') && !this.myDropdown.contains(e.target) && !this.menuBtn.contains(e.target)) {
+                hideMenu();
             }
         });
 
         this.menuButton3 = document.getElementById('menuButton3');
         this.menuButton3.addEventListener('click', () => {
-            this.registration();
+            if (this.savedPage !== 'registrationPage') {
+                this.registration();
+            }
+            hideMenu();
         })
 
         //Кнопка лого
         this.logo = document.getElementById('logo');
         this.logo.addEventListener('click', () => {
-            this.homePage();
+            if (this.savedPage !== 'homePage') {
+                this.homePage();
+            } else {
+                window.scrollTo(0, 0);
+            }
         })
     }
     default() {
         
     }
     homePage() {
+        //localStorage.setItem('activePage', 'homePage');
+        this.savedPage = 'homePage';
         if (this.main) {
             this.main.innerHTML = '';
         } else {
@@ -91,7 +120,7 @@ class Web {
         this.miniInfo1_img.src = 'reference/delivery.png';
         this.miniInfo1_img.className = 'miniInfo1_img';
         this.miniInfo1_p = document.createElement('p');
-        this.miniInfo1_p.textContent = 'Доставка по всему миру почтрой россии';
+        this.miniInfo1_p.textContent = 'Доставка по всему миру почтой россии';
         this.miniInfo1_p.className = 'miniInfo1_p';
 
         this.miniInfo1.append(this.miniInfo1_img);
@@ -103,6 +132,8 @@ class Web {
     }
 
     registration() {
+        //localStorage.setItem('activePage', 'registrationPage');
+        this.savedPage = 'registrationPage';
         if (this.main) {
             this.main.innerHTML = '';
         } else {
@@ -159,9 +190,6 @@ class Web {
 }
 
 class Logical extends Web {
-    constructor() {
-        super();
-    }
     buttonRegistration() {  
         this.pas = document.getElementById('inputPas');
         this.pas1 = document.getElementById('inputPas1');
