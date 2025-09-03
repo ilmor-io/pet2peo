@@ -47,7 +47,9 @@ class Web {
         //обработчик нажатия на кнопку меню
         this.menuBtn.addEventListener('click', (e) => {
             if (this.myDropdown.classList.contains('show')) {
-                hideMenu();
+                setTimeout(() => {
+                    hideMenu();
+                }, 500)
             } else {
                 showMenu();
             }
@@ -56,7 +58,9 @@ class Web {
         //обработчик клика вне меню
         document.addEventListener('click', (e) => {
             if (this.myDropdown.classList.contains('show') && !this.myDropdown.contains(e.target) && !this.menuBtn.contains(e.target)) {
-                hideMenu();
+                setTimeout(() => {
+                    hideMenu();
+                }, 500);
             }
         });
 
@@ -82,7 +86,6 @@ class Web {
         
     }
     homePage() {
-        //localStorage.setItem('activePage', 'homePage');
         this.savedPage = 'homePage';
         if (this.main) {
             this.main.innerHTML = '';
@@ -111,6 +114,8 @@ class Web {
         this.main.append(this.upHomeTile);
 
         //ниже
+
+        //первая сноска
         this.miniInfo = document.createElement('div');
         this.miniInfo.className = 'miniInfo';
 
@@ -129,10 +134,29 @@ class Web {
         this.miniInfo.append(this.miniInfo1);
 
         this.main.append(this.miniInfo);
+
+        //вторая сноска
+        this.miniInfo = document.createElement('div');
+        this.miniInfo.className = 'miniInfo';
+
+        this.miniInfo2 = document.createElement('div');
+        this.miniInfo2.className = 'miniInfo2';
+        this.miniInfo2_img = document.createElement('img');
+        this.miniInfo2_img.src = 'reference/delivery.png';
+        this.miniInfo2_img.className = 'miniInfo2_img';
+        this.miniInfo2_p = document.createElement('p');
+        this.miniInfo2_p.textContent = 'Качество соответствует международным стандартам';
+        this.miniInfo2_p.className = 'miniInfo2_p';
+
+        this.miniInfo2.append(this.miniInfo2_img);
+        this.miniInfo2.append(this.miniInfo2_p);
+
+        this.miniInfo.append(this.miniInfo2);
+
+        this.main.append(this.miniInfo);
     }
 
     registration() {
-        //localStorage.setItem('activePage', 'registrationPage');
         this.savedPage = 'registrationPage';
         if (this.main) {
             this.main.innerHTML = '';

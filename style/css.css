@@ -321,6 +321,7 @@ span#name {
     }
 }
 
+/*первая сноска*/
 .miniInfo {
     margin-top: 10px;
     margin-top: 40px;
@@ -342,7 +343,29 @@ span#name {
     height: 100px;
 }
 .miniInfo1_p {
-    margin-left:120px;
+    margin-left: 120px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+    transition: all 0.5s ease;
+}
+
+/*вторая сноска*/
+.miniInfo2 {
+    display: flex;
+    width: 90%;
+    align-items: center;
+    background-color: #d1c2ac;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+.miniInfo2_img {
+    position: fixed;
+    transition: width 0.5s ease, height 0.5s ease;
+    width: 100px;
+    height: 100px;
+}
+.miniInfo2_p {
+    margin-left: 120px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 18px;
     transition: all 0.5s ease;
@@ -350,6 +373,10 @@ span#name {
 
 @media (max-width: 1030px) {
     .miniInfo1 {
+        position: relative;
+        width: 1000px;
+    }
+    .miniInfo2 {
         position: relative;
         width: 1000px;
     }
@@ -363,6 +390,13 @@ span#name {
         height: 50px;
     }
     .miniInfo1_p {
+        margin-left: 70px;
+    }
+    .miniInfo2_img {
+        width: 50px;
+        height: 50px;
+    }
+    .miniInfo2_p {
         margin-left: 70px;
     }
 }
