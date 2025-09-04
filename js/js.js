@@ -49,7 +49,7 @@ class Web {
             if (this.myDropdown.classList.contains('show')) {
                 setTimeout(() => {
                     hideMenu();
-                }, 500)
+                }, 500);
             } else {
                 showMenu();
             }
@@ -142,7 +142,7 @@ class Web {
         this.miniInfo2 = document.createElement('div');
         this.miniInfo2.className = 'miniInfo2';
         this.miniInfo2_img = document.createElement('img');
-        this.miniInfo2_img.src = 'reference/delivery.png';
+        this.miniInfo2_img.src = 'reference/quality.png';
         this.miniInfo2_img.className = 'miniInfo2_img';
         this.miniInfo2_p = document.createElement('p');
         this.miniInfo2_p.textContent = 'Качество соответствует международным стандартам';
