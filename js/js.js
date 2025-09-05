@@ -171,8 +171,16 @@ class Web {
         this.companyFeed1p.textContent = 'Бумага создаётся на современном оборудовании с соблюдением передовых технологий';
         this.companyFeed1.append(this.companyFeed1p);
 
+        this.companyFeed2 = document.createElement('div');
+        this.companyFeed2.className = 'companyFeed2';
+        this.companyFeed2p = document.createElement('p');
+        this.companyFeed2p.className = 'companyFeed2p';
+        this.companyFeed2p.textContent = '------';
+        this.companyFeed2.append(this.companyFeed2p);
+
         this.companyFeed.append(this.companyFeedGallery);
         this.companyFeed.append(this.companyFeed1);
+        this.companyFeed.append(this.companyFeed2);
         this.main.append(this.companyFeed);
     }
 

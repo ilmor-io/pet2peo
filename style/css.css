@@ -249,7 +249,10 @@ span#name {
 }
 
 .upHome {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+
     width: 98%;
     flex-wrap: wrap;
     gap: 14px;
@@ -261,25 +264,33 @@ span#name {
 
 
 .button1 {
-    width: 74%;
-    height: 49%;
+    grid-column: 1 / 5;
+    grid-row: 1;
     border-radius: 10px;
     border: none;
 }
 .button2 {
-    width: 23.85%;
-    height: 100%;
+    grid-column: 5;
+    grid-row: 1 / 3;
     border-radius: 10px;
     border: none;
 }
-.button3, .button4 {
-    width: 36.3%;
-    height: 48%;
-    margin-top: -149px;
+.button3{
+    grid-column: 1 / 3;
+    grid-row: 2;
+    border-radius: 10px;
+    border: none;
+} 
+.button4 {
+    grid-column: 3 / 5;
+    grid-row: 2;
     border-radius: 10px;
     border: none;
 }
 .button1, .button2, .button3, .button4 {
+    width: auto;
+    height: auto;
+    margin: 0;
     background-color: #948979;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -306,7 +317,7 @@ span#name {
 @media (max-width: 671px) {
     .upHome {
         width: 671px;
-        position: fixed;
+        position: relative;
     }
 
 }
@@ -337,13 +348,14 @@ span#name {
     transition: all 0.5s ease;
 }
 .miniInfo1_img {
-    position: fixed;
+    position: relative;
     transition: width 0.5s ease, height 0.5s ease;
     width: 100px;
     height: 100px;
+    margin: -20px 0 -20px 0;
 }
 .miniInfo1_p {
-    margin-left: 120px;
+    margin-left: 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 18px;
     transition: all 0.5s ease;
@@ -359,45 +371,44 @@ span#name {
     transition: all 0.5s ease;
 }
 .miniInfo2_img {
-    position: fixed;
+    position: relative;
     transition: width 0.5s ease, height 0.5s ease;
     width: 100px;
     height: 100px;
+    margin: -20px 0 -20px 0;
+    transform: translateY(28px) rotate(10deg);
+    
 }
 .miniInfo2_p {
-    margin-left: 120px;
+    margin-left: 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 18px;
     transition: all 0.5s ease;
 }
 
-@media (max-width: 1030px) {
-    .miniInfo1 {
-        position: relative;
-        width: 1000px;
-    }
-    .miniInfo2 {
+@media (max-width: 1080px) {
+    .miniInfo1, .miniInfo2 {
         position: relative;
         width: 1000px;
     }
 }
 @media (max-width: 671px) {
-    .miniInfo {
-        margin-top: 360px;
+    .miniInfo1, .miniInfo2 {
+       height: 30px;
     }
     .miniInfo1_img {
         width: 50px;
         height: 50px;
     }
     .miniInfo1_p {
-        margin-left: 70px;
+        margin-left: 10px;
     }
     .miniInfo2_img {
         width: 50px;
         height: 50px;
     }
     .miniInfo2_p {
-        margin-left: 70px;
+        margin-left: 10px;
     }
 }
 
@@ -412,7 +423,7 @@ span#name {
 .companyFeed1 {
     background: #d1c2ac;
     width: 95%;
-    height: 400px;
+    height: 65cap;
     background-image: linear-gradient(to top, rgba(209, 194, 172, 1) 0%, transparent 45%), url('../reference/companyFeed1.jpeg');
     background-size: cover;
     background-position: center;
@@ -421,6 +432,8 @@ span#name {
     border-bottom: 2px solid #222831;
     margin: 0 auto;
     position: relative;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 10px rgba(148, 137, 121, 1);
 }
 .companyFeed1p {
     text-align: center;
@@ -432,3 +445,41 @@ span#name {
     font-size: 20px;
 }
 
+/*Вторая*/
+
+.companyFeed2 {
+    background: #d1c2ac;
+    width: 95%;
+    height: 65cap;
+    background-image: linear-gradient(to top, rgba(209, 194, 172, 1) 0%, transparent 45%), url('../reference/companyFeed2.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border-bottom: 2px solid #222831;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 40px;
+    box-shadow: 0 10px 10px rgba(148, 137, 121, 1);
+    transition: all 0.5s ease;
+
+    margin-bottom: 40px;
+}
+.companyFeed2p {
+    text-align: center;
+    position: absolute;         
+    bottom: 0;                  
+    left: 50%;                  
+    transform: translateX(-50%); 
+    width: 100%;  
+    font-size: 20px;
+}
+
+@media (max-width: 1500px) {
+    .companyFeed1 {
+        height: 400px;
+    }
+    .companyFeed2 {
+        height: 400px;
+    }
+}
