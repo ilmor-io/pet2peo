@@ -422,7 +422,7 @@ span#name {
 
 .companyFeed1 {
     background: #d1c2ac;
-    width: 95%;
+    width: 90%;
     height: 65cap;
     background-image: linear-gradient(to top, rgba(209, 194, 172, 1) 0%, transparent 45%), url('../reference/companyFeed1.jpeg');
     background-size: cover;
@@ -449,7 +449,7 @@ span#name {
 
 .companyFeed2 {
     background: #d1c2ac;
-    width: 95%;
+    width: 90%;
     height: 65cap;
     background-image: linear-gradient(to top, rgba(209, 194, 172, 1) 0%, transparent 45%), url('../reference/companyFeed2.jpeg');
     background-size: cover;
@@ -475,11 +475,13 @@ span#name {
     font-size: 20px;
 }
 
-@media (max-width: 1500px) {
-    .companyFeed1 {
-        height: 400px;
+@media (max-width: 1080px) {
+    .companyFeed1, .companyFeed2 {
+        width: 100%;
     }
-    .companyFeed2 {
+}
+@media (max-width: 1500px) {
+    .companyFeed1, .companyFeed2 {
         height: 400px;
     }
 }

@@ -175,7 +175,7 @@ class Web {
         this.companyFeed2.className = 'companyFeed2';
         this.companyFeed2p = document.createElement('p');
         this.companyFeed2p.className = 'companyFeed2p';
-        this.companyFeed2p.textContent = '------';
+        this.companyFeed2p.textContent = 'Доставка осуществляется частными перевозками';
         this.companyFeed2.append(this.companyFeed2p);
 
         this.companyFeed.append(this.companyFeedGallery);
