@@ -4,8 +4,11 @@ class Web {
         this.savedPage = localStorage.getItem('activePage');
 
         this.header();
-        //this.registration();
-        this.homePage();
+        if (this.savedPage === 'registrationPage') {
+            this.registration();
+        } else {
+            this.homePage();
+        }
     }
     header() {
         // Кнопка меню
@@ -47,9 +50,7 @@ class Web {
         //обработчик нажатия на кнопку меню
         this.menuBtn.addEventListener('click', (e) => {
             if (this.myDropdown.classList.contains('show')) {
-                setTimeout(() => {
-                    hideMenu();
-                }, 500);
+                hideMenu();
             } else {
                 showMenu();
             }
@@ -58,9 +59,7 @@ class Web {
         //обработчик клика вне меню
         document.addEventListener('click', (e) => {
             if (this.myDropdown.classList.contains('show') && !this.myDropdown.contains(e.target) && !this.menuBtn.contains(e.target)) {
-                setTimeout(() => {
-                    hideMenu();
-                }, 500);
+                hideMenu();
             }
         });
 
@@ -86,6 +85,7 @@ class Web {
         
     }
     homePage() {
+        localStorage.setItem('activePage', 'homePage');
         this.savedPage = 'homePage';
         if (this.main) {
             this.main.innerHTML = '';
@@ -154,9 +154,30 @@ class Web {
         this.miniInfo.append(this.miniInfo2);
 
         this.main.append(this.miniInfo);
+
+        //третья строка
+        //...
+
+        this.companyFeed = document.createElement('div');
+        this.companyFeed.className = 'companyFeed';
+
+        this.companyFeedGallery = document.createElement('div');
+        this.companyFeedGallery.className = 'companyFeedGallery';
+
+        this.companyFeed1 = document.createElement('div');
+        this.companyFeed1.className = 'companyFeed1';
+        this.companyFeed1p = document.createElement('p');
+        this.companyFeed1p.className = 'companyFeed1p';
+        this.companyFeed1p.textContent = 'Бумага создаётся на современном оборудовании с соблюдением передовых технологий';
+        this.companyFeed1.append(this.companyFeed1p);
+
+        this.companyFeed.append(this.companyFeedGallery);
+        this.companyFeed.append(this.companyFeed1);
+        this.main.append(this.companyFeed);
     }
 
     registration() {
+        localStorage.setItem('activePage', 'registrationPage');
         this.savedPage = 'registrationPage';
         if (this.main) {
             this.main.innerHTML = '';
