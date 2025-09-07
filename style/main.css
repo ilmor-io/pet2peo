@@ -1,4 +1,7 @@
          /* MAIN */
+#main {
+    min-height: 85vh;
+}
 .pReg {
     text-align: center;
     font-size: 30px;

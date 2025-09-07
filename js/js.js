@@ -212,6 +212,7 @@ class Web {
             this.main.innerHTML = '';
         } else {
             this.main = document.createElement('main');
+            this.main.id = 'main';
             if (header && footer) {
                 header.parentNode.insertBefore(this.main, footer);
             }

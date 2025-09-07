@@ -1,9 +1,11 @@
           /* FOOTER */
 #footer {
-    margin-top: 20px;
+    margin-top: 40px;
     background-color: #222831;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     color: white;
+    flex-shrink: 0;
+    padding: 25px 0;
 }
