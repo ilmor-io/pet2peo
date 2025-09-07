@@ -1,0 +1,9 @@
+          /* FOOTER */
+#footer {
+    margin-top: 20px;
+    background-color: #222831;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}

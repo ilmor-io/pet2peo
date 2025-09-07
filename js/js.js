@@ -16,6 +16,7 @@ class Web {
         this.myDropdown = document.getElementById('myDropdown');
 
         //функция меню
+        //TODO Перенести функции в логический класс
         const hideMenu = () => {
             //скрытие меню
             if (this.myDropdown.classList.contains('show')) {
@@ -87,12 +88,22 @@ class Web {
     homePage() {
         localStorage.setItem('activePage', 'homePage');
         this.savedPage = 'homePage';
+
+        //TODO вывести в класс логики
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
         if (this.main) {
+            if (header && footer) {
+                header.parentNode.insertBefore(this.main, footer);
+            }
             this.main.innerHTML = '';
         } else {
             this.main = document.createElement('main');
-            document.body.append(this.main);
+            if (header && footer) {
+                header.parentNode.insertBefore(this.main, footer);
+            }
         }
+
         //верх главной
         this.upHomeTile = document.createElement('div');
         this.upHomeTile.className = 'upHomeTile';
@@ -107,7 +118,6 @@ class Web {
         this.button4 = document.createElement('button');
         this.button4.className = 'button4';
 
-
         this.upHome.append(this.button1, this.button2, this.button3, this.button4);
 
         this.upHomeTile.append(this.upHome);
@@ -115,83 +125,96 @@ class Web {
 
         //ниже
 
-        //первая сноска
-        this.miniInfo = document.createElement('div');
-        this.miniInfo.className = 'miniInfo';
+        //Основа сноски
+        class MiniInfo {
+            constructor(imgSrc, text, additionalClass = '') {
+                //Создаём основной контейнер miniInfo
+                this.miniInfo = document.createElement('div');
+                this.miniInfo.className = 'miniInfo';
 
-        this.miniInfo1 = document.createElement('div');
-        this.miniInfo1.className = 'miniInfo1';
-        this.miniInfo1_img = document.createElement('img');
-        this.miniInfo1_img.src = 'reference/delivery.png';
-        this.miniInfo1_img.className = 'miniInfo1_img';
-        this.miniInfo1_p = document.createElement('p');
-        this.miniInfo1_p.textContent = 'Доставка по всему миру почтой россии';
-        this.miniInfo1_p.className = 'miniInfo1_p';
+                //Создаём внутренний контейнер (miniInfo1, miniInfo2 и т.д.)
+                this.container = document.createElement('div');
+                this.container.className = `miniInfo${additionalClass}`;
 
-        this.miniInfo1.append(this.miniInfo1_img);
-        this.miniInfo1.append(this.miniInfo1_p);
+                //Создаём изображение
+                this.img = document.createElement('img');
+                this.img.src = imgSrc;
+                this.img.className = `miniInfo${additionalClass}_img`;
 
-        this.miniInfo.append(this.miniInfo1);
+                //Создаём параграф
+                this.p = document.createElement('p');
+                this.p.textContent = text;
+                this.p.className = `miniInfo${additionalClass}_p`;
 
-        this.main.append(this.miniInfo);
+                //Собираем всё вместе
+                this.container.append(this.img, this.p);
+                this.miniInfo.append(this.container);
 
-        //вторая сноска
-        this.miniInfo = document.createElement('div');
-        this.miniInfo.className = 'miniInfo';
+                //Возвращаем готовый элемент
+                return this.miniInfo;
+            }
+        }
 
-        this.miniInfo2 = document.createElement('div');
-        this.miniInfo2.className = 'miniInfo2';
-        this.miniInfo2_img = document.createElement('img');
-        this.miniInfo2_img.src = 'reference/quality.png';
-        this.miniInfo2_img.className = 'miniInfo2_img';
-        this.miniInfo2_p = document.createElement('p');
-        this.miniInfo2_p.textContent = 'Качество соответствует международным стандартам';
-        this.miniInfo2_p.className = 'miniInfo2_p';
+        //Первая сноска
+        const deliveryInfo = new MiniInfo('reference/delivery.png', 'Доставка по всему миру почтой россии', '1');
+        this.main.append(deliveryInfo);
 
-        this.miniInfo2.append(this.miniInfo2_img);
-        this.miniInfo2.append(this.miniInfo2_p);
+        //Вторая сноска
+        const qualityInfo = new MiniInfo('reference/quality.png', 'Качество соответствует международным стандартам', '2')
+        this.main.append(qualityInfo);
 
-        this.miniInfo.append(this.miniInfo2);
-
-        this.main.append(this.miniInfo);
-
-        //третья строка
+        //Третья строка
         //...
 
-        this.companyFeed = document.createElement('div');
-        this.companyFeed.className = 'companyFeed';
+        class CompanyFeed {
+            constructor(text, additionalClass = '') {
+                //Создаём основной контейнер companyFeed
+                this.companyFeed = document.createElement('div');
+                this.companyFeed.className = 'companyFeed';
 
-        this.companyFeedGallery = document.createElement('div');
-        this.companyFeedGallery.className = 'companyFeedGallery';
+                //создаём внутренний контейнер
+                this.container = document.createElement('div');
+                this.container.className = `companyFeed${additionalClass}`;
 
-        this.companyFeed1 = document.createElement('div');
-        this.companyFeed1.className = 'companyFeed1';
-        this.companyFeed1p = document.createElement('p');
-        this.companyFeed1p.className = 'companyFeed1p';
-        this.companyFeed1p.textContent = 'Бумага создаётся на современном оборудовании с соблюдением передовых технологий';
-        this.companyFeed1.append(this.companyFeed1p);
+                //Создаём параграф
+                this.p = document.createElement('p');
+                this.p.className = `companyFeed${additionalClass}p`;
+                this.p.textContent = text;
 
-        this.companyFeed2 = document.createElement('div');
-        this.companyFeed2.className = 'companyFeed2';
-        this.companyFeed2p = document.createElement('p');
-        this.companyFeed2p.className = 'companyFeed2p';
-        this.companyFeed2p.textContent = 'Доставка осуществляется частными перевозками';
-        this.companyFeed2.append(this.companyFeed2p);
+                //Собираем всё вместе
+                this.container.append(this.p);
+                this.companyFeed.append(this.container);
 
-        this.companyFeed.append(this.companyFeedGallery);
-        this.companyFeed.append(this.companyFeed1);
-        this.companyFeed.append(this.companyFeed2);
-        this.main.append(this.companyFeed);
+                //Возвращаем готовый элемент
+                return this.companyFeed;
+            }
+        }
+        //Первый фид
+        const factoryFeed = new CompanyFeed('Бумага создаётся на современном оборудовании с соблюдением передовых технологий', '1');
+        this.main.append(factoryFeed);
+        
+        //Второй фид
+        const deliveryFeed = new CompanyFeed('Доставка осуществляется частными перевозками', '2');
+        this.main.append(deliveryFeed);
     }
 
     registration() {
         localStorage.setItem('activePage', 'registrationPage');
         this.savedPage = 'registrationPage';
+
+        //TODO вывести в класс логики
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
         if (this.main) {
+            if (header && footer) {
+                header.parentNode.insertBefore(this.main, footer);
+            }
             this.main.innerHTML = '';
         } else {
             this.main = document.createElement('main');
-            document.body.append(this.main);
+            if (header && footer) {
+                header.parentNode.insertBefore(this.main, footer);
+            }
         }
 
         this.pReg = document.createElement('p');
@@ -233,16 +256,15 @@ class Web {
             logical.buttonRegistration();
         })
 
-        this.main = document.createElement('main');
-
         this.main.append(this.pReg);
         this.main.append(this.containerReg);
 
-        document.body.append(this.main);
     }
+    
 }
 
 class Logical extends Web {
+    //логика кнопки регистрации
     buttonRegistration() {  
         this.pas = document.getElementById('inputPas');
         this.pas1 = document.getElementById('inputPas1');
@@ -270,6 +292,9 @@ class Logical extends Web {
         } else {
 
         }
+    }
+    bor() {
+        alert('ddd')
     }
 }
 
