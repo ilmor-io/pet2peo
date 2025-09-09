@@ -197,6 +197,60 @@ class Web {
         //Второй фид
         const deliveryFeed = new CompanyFeed('Доставка осуществляется частными перевозками', '2');
         this.main.append(deliveryFeed);
+
+        //Раздел фидбэка
+        //TODO Доделать!!!
+        this.feedbackSection = document.createElement('div');
+        this.feedbackSection.className = 'feedbackSection';
+
+        this.feedback_p = document.createElement('p')
+        this.feedback_p.className = 'feedback_p';
+        this.feedback_p.textContent = 'Обратная связь';
+        this.feedbackSection.append(this.feedback_p);
+
+        this.feedback_p = document.createElement('p')
+        this.feedback_p.className = 'feedback_p_info';
+        this.feedback_p.textContent = 'оставьте контактную связь и менеджер свяжется с вами.';
+        this.feedbackSection.append(this.feedback_p);
+
+        this.feedback = document.createElement('div');
+        this.feedback.className = 'feedback';
+
+        this.feedbackInputSection = document.createElement('div');
+        this.feedbackInputSection.className = 'feedbackInputSection';
+        this.feedback.append(this.feedbackInputSection);
+
+        this.feedbackMail_p = document.createElement('p');
+        this.feedbackMail_p.className = 'feedbackMail_p';
+        this.feedbackMail_p.textContent = 'Введите почту';
+        this.feedbackInputSection.append(this.feedbackMail_p);
+
+        this.feedbackMail = document.createElement('input');
+        this.feedbackMail.className = 'feedbackMail';
+        this.feedbackMail.placeholder = 'Email';
+        this.feedbackInputSection.append(this.feedbackMail);
+
+        this.feedbackPhone_p = document.createElement('p');
+        this.feedbackPhone_p.className = 'feedbackPhone_p';
+        this.feedbackPhone_p.textContent = 'Введите телефон';
+        this.feedbackInputSection.append(this.feedbackPhone_p);
+
+        this.feedbackPhone = document.createElement('input');
+        this.feedbackPhone.className = 'feedbackPhone';
+        this.feedbackPhone.placeholder = 'Телефон';
+        this.feedbackInputSection.append(this.feedbackPhone);
+
+        this.buttonFeedback = document.createElement('button');
+        this.buttonFeedback.className = 'buttonFeedback';
+        this.buttonFeedback.textContent = 'Отправить';
+        this.feedbackInputSection.append(this.buttonFeedback);
+
+        this.accompanying = document.createElement('div');
+        this.accompanying.className = 'accompanying';
+        this.feedback.append(this.accompanying);
+
+        this.feedbackSection.append(this.feedback);
+        this.main.append(this.feedbackSection);
     }
 
     registration() {
