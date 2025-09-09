@@ -199,7 +199,6 @@ class Web {
         this.main.append(deliveryFeed);
 
         //Раздел фидбэка
-        //TODO Доделать!!!
         this.feedbackSection = document.createElement('div');
         this.feedbackSection.className = 'feedbackSection';
 
