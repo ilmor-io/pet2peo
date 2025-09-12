@@ -1,3 +1,5 @@
+import { supabase } from './Supabase.js';
+
 class Web {
     constructor() {
         //флаг страницы
@@ -250,6 +252,8 @@ class Web {
 
         this.feedbackSection.append(this.feedback);
         this.main.append(this.feedbackSection);
+
+        
     }
 
     registration() {
@@ -308,7 +312,7 @@ class Web {
         this.button.append(this.buttonReg)
         this.areaReg.append(this.button);
         this.buttonReg.addEventListener('click', () => {
-            logical.buttonRegistration();
+            this.buttonRegistration();
         })
 
         this.main.append(this.pReg);
@@ -320,36 +324,62 @@ class Web {
 
 class Logical extends Web {
     //логика кнопки регистрации
-    buttonRegistration() {  
+    async buttonRegistration() {
         this.pas = document.getElementById('inputPas');
         this.pas1 = document.getElementById('inputPas1');
         this.Mail = document.getElementById('inputMail');
 
         const isValid = this.Mail.checkValidity();
 
-        if (this.pas.value !== this.pas1.value || this.pas.value.trim() == '' || this.pas1.value.trim() == '') {
+        if (this.pas.value !== this.pas1.value || this.pas.value.trim() === '') {
             this.pas.classList.add('error');
             this.pas1.classList.add('error');
             setTimeout(() => {
                 this.pas.classList.remove('error');
                 this.pas1.classList.remove('error');
             }, 5000);
-        } else {
-            this.pas.classList.remove('error');
-            this.pas1.classList.remove('error');
-            alert('good!');
-        };
-        if (!isValid || this.Mail.value == null) {
+            return;
+        }
+
+        if (!isValid || this.Mail.value.trim() === '') {
             this.Mail.classList.add('error');
             setTimeout(() => {
                 this.Mail.classList.remove('error');
-            }, 5000)
-        } else {
-
+            }, 5000);
+            return;
         }
-    }
-    bor() {
-        alert('ddd')
+
+        // Используем безопасную регистрацию через Supabase Auth
+        const { data, error } = await supabase.auth.signUp({
+            email: this.Mail.value,
+            password: this.pas.value,
+        });
+
+        if (error) {
+            console.error('Ошибка при регистрации:', error.message);
+            alert('Ошибка при регистрации: ' + error.message);
+        } else {
+            // Получаем ID пользователя
+            const userId = data.user?.id;
+
+            // Создаём профиль в таблице profiles
+            const { error: profileError } = await supabase
+                .from('profiles')
+                .insert([
+                    {
+                        id: userId,
+                        email: this.Mail.value,
+                        // можно добавить и другие поля, например:
+                        // username: 'Имя_пользователя'
+                    }
+                ]);
+
+            if (profileError) {
+                console.error('Ошибка при создании профиля:', profileError.message);
+            }
+
+            alert('Регистрация прошла успешно! Подтвердите почту.');
+        }
     }
 }
 
